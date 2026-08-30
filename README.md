@@ -1,5 +1,4 @@
 # RealEstatePrediction
-# RealEstatePrediction
 EDA
 * Diện tích ảnh hưởng thế nào đến giá nhà?
 * Giá trên mỗi m² thay đổi thế nào theo diện tích?
@@ -33,6 +32,7 @@ EDA
 * Dữ liệu có missing/duplicate/bất thường ở đâu?
 
 Airflow
+
 eda_basic
 - shape
 - columns
