@@ -1,0 +1,12 @@
+dimension,group,mean_price,count
+summary_stats,mean_area,111.56458145306858,
+summary_stats,median_area,77.55,
+summary_stats,std_area,127.60183379409852,
+summary_stats,min_area,24.0,
+summary_stats,max_area,1500.0,
+area_group,<30m2,5720657754.010695,187.0
+area_group,30-50m2,7564363434.324659,1614.0
+area_group,50-80m2,8494203837.863621,2955.0
+area_group,80-120m2,11142446695.211529,2151.0
+area_group,120-200m2,19540051980.80279,1146.0
+area_group,>200m2,28388677348.95068,811.0
