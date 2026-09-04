@@ -61,4 +61,3 @@ eda_relationship
 - bathrooms vs price
 - floors vs price
 
-->>> xuat file
