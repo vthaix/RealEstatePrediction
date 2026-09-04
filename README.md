@@ -32,7 +32,10 @@ EDA
 * Dữ liệu có missing/duplicate/bất thường ở đâu?
 
 Airflow
+<<<<<<< HEAD
 
+=======
+>>>>>>> thai
 eda_basic
 - shape
 - columns
@@ -62,4 +65,8 @@ eda_relationship
 - bathrooms vs price
 - floors vs price
 
+<<<<<<< HEAD
 ->>> xuat file
+=======
+->>> xuat file
+>>>>>>> thai

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Báo cáo EDA - Dữ liệu Bất động sản</title>
+<style>
+  body { font-family: -apple-system, Arial, sans-serif; margin: 40px; color: #222; }
+  h1 { color: #2E86AB; }
+  h2 { color: #C73E1D; border-bottom: 2px solid #eee; padding-bottom: 6px; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 24px; }
+  th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+  th { background-color: #2E86AB; color: white; }
+  .metric-grid { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+  .metric-card { background: #f7f7f7; border-radius: 8px; padding: 16px 20px; min-width: 180px; }
+  .metric-card .label { font-size: 13px; color: #666; }
+  .metric-card .value { font-size: 20px; font-weight: bold; color: #2E86AB; }
+  img { max-width: 100%; border: 1px solid #eee; border-radius: 6px; margin-bottom: 24px; }
+  .footer { color: #999; font-size: 12px; margin-top: 40px; }
+</style>
+</head>
+<body>
+  <h1>📊 Báo cáo EDA - Dữ liệu Bất động sản</h1>
+  <p>Thời gian tạo báo cáo: 2026-09-04T06:53:58.445798</p>
+  <p>Số dòng sau làm sạch: <b>10000</b> — Sau lọc outlier: <b>8864</b></p>
+
+  <h2>Tổng quan Giá</h2>
+  <div class="metric-grid">
+    <div class="metric-card"><div class="label">Trung bình</div><div class="value">12,157,326,000 đ</div></div>
+    <div class="metric-card"><div class="label">Trung vị</div><div class="value">7,500,000,000 đ</div></div>
+    <div class="metric-card"><div class="label">Nhỏ nhất</div><div class="value">550,000,000 đ</div></div>
+    <div class="metric-card"><div class="label">Lớn nhất</div><div class="value">115,000,000,000 đ</div></div>
+  </div>
+
+  <h2>Tổng quan Diện tích</h2>
+  <div class="metric-grid">
+    <div class="metric-card"><div class="label">Trung bình</div><div class="value">111.6 m²</div></div>
+    <div class="metric-card"><div class="label">Trung vị</div><div class="value">77.5 m²</div></div>
+    <div class="metric-card"><div class="label">Giá/m² trung bình</div><div class="value">132,708,791 đ</div></div>
+  </div>
+
+  <h2>Biểu đồ</h2>
+  <img src="charts/price_distribution.png" alt="Phân phối giá">
+  <img src="charts/price_by_district.png" alt="Giá theo quận huyện">
+  <img src="charts/area_vs_price.png" alt="Diện tích vs Giá">
+
+  <h2>Top 5 Tỉnh/Thành phố nhiều tin nhất</h2>
+  <table><tr><th>Tỉnh/Thành</th><th>Số tin</th></tr><tr><td>Hồ Chí Minh</td><td>3360</td></tr><tr><td>Hà Nội</td><td>3045</td></tr><tr><td>Đà Nẵng</td><td>517</td></tr><tr><td>Bình Dương</td><td>365</td></tr><tr><td>Khánh Hòa</td><td>253</td></tr></table>
+
+  <h2>Top 5 Loại hình BĐS nhiều tin nhất</h2>
+  <table><tr><th>Loại hình</th><th>Số tin</th></tr><tr><td>Nhà</td><td>4185</td></tr><tr><td>Đất</td><td>1981</td></tr><tr><td>Căn hộ chung cư</td><td>1884</td></tr><tr><td>Biệt thự/Nhà liền kề</td><td>667</td></tr><tr><td>Shophouse</td><td>147</td></tr></table>
+
+  <div class="footer">Sinh tự động bởi Airflow DAG: real_estate_eda_pipeline</div>
+</body>
+</html>

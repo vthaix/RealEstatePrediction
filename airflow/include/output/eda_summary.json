@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-09-04T06:53:58.445798",
+  "cleaned_rows": 10000,
+  "filtered_rows": 8864,
+  "missing_pct_raw": {
+    "Unnamed: 0": 0.0,
+    "name": 0.05,
+    "description": 0.05,
+    "property_type_name": 0.0,
+    "province_name": 0.0,
+    "district_name": 2.97,
+    "ward_name": 14.3,
+    "street_name": 39.12,
+    "project_name": 72.37,
+    "price": 7.73,
+    "area": 0.0,
+    "floor_count": 75.31,
+    "frontage_width": 48.04,
+    "house_depth": 97.39,
+    "road_width": 79.98,
+    "bedroom_count": 45.84,
+    "bathroom_count": 49.33,
+    "house_direction": 69.49,
+    "balcony_direction": 84.45,
+    "published_at": 0.0
+  },
+  "price": {
+    "mean": 12157326000.14508,
+    "median": 7500000000.0,
+    "std": 14484571466.739916,
+    "min": 550000000.0,
+    "max": 115000000000.0
+  },
+  "area": {
+    "mean": 111.56458145306858,
+    "median": 77.55,
+    "std": 127.60183379409852,
+    "min": 24.0,
+    "max": 1500.0
+  },
+  "price_per_m2": {
+    "mean": 132708791.02271362,
+    "median": 97777777.77777778
+  },
+  "top_provinces": {
+    "Hồ Chí Minh": 3360,
+    "Hà Nội": 3045,
+    "Đà Nẵng": 517,
+    "Bình Dương": 365,
+    "Khánh Hòa": 253
+  },
+  "top_property_types": {
+    "Nhà": 4185,
+    "Đất": 1981,
+    "Căn hộ chung cư": 1884,
+    "Biệt thự/Nhà liền kề": 667,
+    "Shophouse": 147
+  }
+}
