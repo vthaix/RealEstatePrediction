@@ -1,34 +1,3 @@
-"""
-DAG: real_estate_eda_pipeline (TaskFlow API - airflow.sdk)
-------------------------------------------------------------
-Pipeline EDA (Exploratory Data Analysis) cho dữ liệu tin đăng bất động sản,
-viết theo TaskFlow API mới của Airflow 3.x (`from airflow.sdk import dag, task`).
-
-Input : /usr/local/airflow/include/vietnam_real_estate_fnl.csv
-         (đổi qua Airflow Variable "real_estate_raw_path")
-
-Output: /usr/local/airflow/include/output/
-    ├── cleaned_data.csv
-    ├── filtered_data.csv
-    ├── price_analysis.csv
-    ├── area_analysis.csv
-    ├── location_analysis.csv
-    ├── correlation_matrix.csv
-    ├── eda_summary.json
-    ├── charts/
-    │   ├── price_distribution.png
-    │   ├── price_by_district.png
-    │   └── area_vs_price.png
-    └── report.html
-
-Schema input (20 cột):
-    Unnamed: 0, name, description, property_type_name, province_name,
-    district_name, ward_name, street_name, project_name, price, area,
-    floor_count, frontage_width, house_depth, road_width, bedroom_count,
-    bathroom_count, house_direction, balcony_direction, published_at
-------------------------------------------------------------
-"""
-
 from __future__ import annotations
 
 import json
@@ -38,7 +7,7 @@ from datetime import datetime, timedelta
 import pandas as pd
 import matplotlib
 
-matplotlib.use("Agg")  # không cần GUI, chạy được trong worker Airflow
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -398,60 +367,60 @@ def real_estate_eda_pipeline():
         )
 
         html = f"""<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<title>Báo cáo EDA - Dữ liệu Bất động sản</title>
-<style>
-  body {{ font-family: -apple-system, Arial, sans-serif; margin: 40px; color: #222; }}
-  h1 {{ color: #2E86AB; }}
-  h2 {{ color: #C73E1D; border-bottom: 2px solid #eee; padding-bottom: 6px; }}
-  table {{ border-collapse: collapse; width: 100%; margin-bottom: 24px; }}
-  th, td {{ border: 1px solid #ddd; padding: 8px 12px; text-align: left; }}
-  th {{ background-color: #2E86AB; color: white; }}
-  .metric-grid {{ display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }}
-  .metric-card {{ background: #f7f7f7; border-radius: 8px; padding: 16px 20px; min-width: 180px; }}
-  .metric-card .label {{ font-size: 13px; color: #666; }}
-  .metric-card .value {{ font-size: 20px; font-weight: bold; color: #2E86AB; }}
-  img {{ max-width: 100%; border: 1px solid #eee; border-radius: 6px; margin-bottom: 24px; }}
-  .footer {{ color: #999; font-size: 12px; margin-top: 40px; }}
-</style>
-</head>
-<body>
-  <h1>Báo cáo EDA - Dữ liệu Bất động sản</h1>
-  <p>Thời gian tạo báo cáo: {summary['generated_at']}</p>
-  <p>Số dòng sau làm sạch: <b>{summary['cleaned_rows']}</b> — Sau lọc outlier: <b>{summary['filtered_rows']}</b></p>
+            <html lang="vi">
+            <head>
+            <meta charset="UTF-8">
+            <title>Báo cáo EDA - Dữ liệu Bất động sản</title>
+            <style>
+            body {{ font-family: -apple-system, Arial, sans-serif; margin: 40px; color: #222; }}
+            h1 {{ color: #2E86AB; }}
+            h2 {{ color: #C73E1D; border-bottom: 2px solid #eee; padding-bottom: 6px; }}
+            table {{ border-collapse: collapse; width: 100%; margin-bottom: 24px; }}
+            th, td {{ border: 1px solid #ddd; padding: 8px 12px; text-align: left; }}
+            th {{ background-color: #2E86AB; color: white; }}
+            .metric-grid {{ display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }}
+            .metric-card {{ background: #f7f7f7; border-radius: 8px; padding: 16px 20px; min-width: 180px; }}
+            .metric-card .label {{ font-size: 13px; color: #666; }}
+            .metric-card .value {{ font-size: 20px; font-weight: bold; color: #2E86AB; }}
+            img {{ max-width: 100%; border: 1px solid #eee; border-radius: 6px; margin-bottom: 24px; }}
+            .footer {{ color: #999; font-size: 12px; margin-top: 40px; }}
+            </style>
+            </head>
+            <body>
+            <h1>Báo cáo EDA - Dữ liệu Bất động sản</h1>
+            <p>Thời gian tạo báo cáo: {summary['generated_at']}</p>
+            <p>Số dòng sau làm sạch: <b>{summary['cleaned_rows']}</b> — Sau lọc outlier: <b>{summary['filtered_rows']}</b></p>
 
-  <h2>Tổng quan Giá</h2>
-  <div class="metric-grid">
-    <div class="metric-card"><div class="label">Trung bình</div><div class="value">{fmt(summary['price']['mean'])} đ</div></div>
-    <div class="metric-card"><div class="label">Trung vị</div><div class="value">{fmt(summary['price']['median'])} đ</div></div>
-    <div class="metric-card"><div class="label">Nhỏ nhất</div><div class="value">{fmt(summary['price']['min'])} đ</div></div>
-    <div class="metric-card"><div class="label">Lớn nhất</div><div class="value">{fmt(summary['price']['max'])} đ</div></div>
-  </div>
+            <h2>Tổng quan Giá</h2>
+            <div class="metric-grid">
+                <div class="metric-card"><div class="label">Trung bình</div><div class="value">{fmt(summary['price']['mean'])} đ</div></div>
+                <div class="metric-card"><div class="label">Trung vị</div><div class="value">{fmt(summary['price']['median'])} đ</div></div>
+                <div class="metric-card"><div class="label">Nhỏ nhất</div><div class="value">{fmt(summary['price']['min'])} đ</div></div>
+                <div class="metric-card"><div class="label">Lớn nhất</div><div class="value">{fmt(summary['price']['max'])} đ</div></div>
+            </div>
 
-  <h2>Tổng quan Diện tích</h2>
-  <div class="metric-grid">
-    <div class="metric-card"><div class="label">Trung bình</div><div class="value">{summary['area']['mean']:.1f} m²</div></div>
-    <div class="metric-card"><div class="label">Trung vị</div><div class="value">{summary['area']['median']:.1f} m²</div></div>
-    <div class="metric-card"><div class="label">Giá/m² trung bình</div><div class="value">{fmt(summary['price_per_m2']['mean'])} đ</div></div>
-  </div>
+            <h2>Tổng quan Diện tích</h2>
+            <div class="metric-grid">
+                <div class="metric-card"><div class="label">Trung bình</div><div class="value">{summary['area']['mean']:.1f} m²</div></div>
+                <div class="metric-card"><div class="label">Trung vị</div><div class="value">{summary['area']['median']:.1f} m²</div></div>
+                <div class="metric-card"><div class="label">Giá/m² trung bình</div><div class="value">{fmt(summary['price_per_m2']['mean'])} đ</div></div>
+            </div>
 
-  <h2>Biểu đồ</h2>
-  <img src="charts/price_distribution.png" alt="Phân phối giá">
-  <img src="charts/price_by_district.png" alt="Giá theo quận huyện">
-  <img src="charts/area_vs_price.png" alt="Diện tích vs Giá">
+            <h2>Biểu đồ</h2>
+            <img src="charts/price_distribution.png" alt="Phân phối giá">
+            <img src="charts/price_by_district.png" alt="Giá theo quận huyện">
+            <img src="charts/area_vs_price.png" alt="Diện tích vs Giá">
 
-  <h2>Top 5 Tỉnh/Thành phố nhiều tin nhất</h2>
-  <table><tr><th>Tỉnh/Thành</th><th>Số tin</th></tr>{top_provinces_rows}</table>
+            <h2>Top 5 Tỉnh/Thành phố nhiều tin nhất</h2>
+            <table><tr><th>Tỉnh/Thành</th><th>Số tin</th></tr>{top_provinces_rows}</table>
 
-  <h2>Top 5 Loại hình BĐS nhiều tin nhất</h2>
-  <table><tr><th>Loại hình</th><th>Số tin</th></tr>{top_types_rows}</table>
+            <h2>Top 5 Loại hình BĐS nhiều tin nhất</h2>
+            <table><tr><th>Loại hình</th><th>Số tin</th></tr>{top_types_rows}</table>
 
-  <div class="footer">Sinh tự động bởi Airflow DAG: real_estate_eda_pipeline</div>
-</body>
-</html>
-"""
+            <div class="footer">Sinh tự động bởi Airflow DAG: real_estate_eda_pipeline</div>
+            </body>
+            </html>
+        """
         out_path = os.path.join(OUTPUT_DIR, "report.html")
         with open(out_path, "w", encoding="utf-8") as f:
             f.write(html)
